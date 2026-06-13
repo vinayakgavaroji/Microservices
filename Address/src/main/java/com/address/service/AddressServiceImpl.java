@@ -110,7 +110,6 @@ public class AddressServiceImpl implements AddressService {
             address.setEmpId(addressRequest.getEmpId());
 
             addressList.add(address);
-
         });
 
         return addressList;
