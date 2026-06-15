@@ -11,7 +11,7 @@ import java.util.List;
 @FeignClient(name = "ADDRESS")
 public interface AddressClient {
 
-    @GetMapping("/addresses/empId/{empId}")
-    List<AddressDto> getAddressByEmpId(@PathVariable Long empId);
+    @GetMapping("/address/empId/{empId}")
+    List<AddressDto> getAddressByEmpId(@PathVariable("empId") Long empId);
 
 }

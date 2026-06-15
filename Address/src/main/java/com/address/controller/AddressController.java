@@ -49,7 +49,7 @@ public class AddressController {
     }
 
     @GetMapping("/empId/{empId}")
-    public ResponseEntity<List<AddressDto>> getAddressByEmpId(@PathVariable Long empId) {
+    public ResponseEntity<List<AddressDto>> getAddressByEmpId(@PathVariable("empId") Long empId) {
         List<AddressDto> response = addressService.getAddressByEmpId(empId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

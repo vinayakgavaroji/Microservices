@@ -88,10 +88,10 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public List<AddressDto> getAddressByEmpId(Long empId) {
-        List<Address> addressByEmpId = addressRepository.findAddressByEmpId(empId);
-        if(addressByEmpId.isEmpty()){
-            throw new ResourceNotFoundException("No address found for employee id: " + empId);
-        }
+        List<Address> addressByEmpId = addressRepository.findByEmpId(empId);
+//        if(addressByEmpId.isEmpty()){ jack sparrow
+//            throw new ResourceNotFoundException("No address found for employee id: " + empId);
+//        }
         return addressByEmpId.stream().map(address -> modelMapper.map(address, AddressDto.class)).toList();
     }
 
