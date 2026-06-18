@@ -27,7 +27,7 @@ public class UserService {
 
     public UserDto saveUser(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setCreatedAt(LocalDateTime.now());
+//        user.setCreatedAt(LocalDateTime.now());
         User savedUser = userRepository.save(user);
         return new UserDto(savedUser.getId(),
                 savedUser.getUsername(),
