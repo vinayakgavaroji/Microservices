@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="EUREKA-SERVER" />
+        <module name="API-GATEWAY" />
         <module name="Address" />
         <module name="employee" />
         <module name="AUTH" />
@@ -15,6 +16,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="API-GATEWAY" options="-parameters" />
       <module name="AUTH" options="-parameters" />
       <module name="Address" options="-parameters" />
       <module name="EUREKA-SERVER" options="-parameters" />
