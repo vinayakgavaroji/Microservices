@@ -25,23 +25,29 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
 
-            if(validator.predicate.test(exchange.getRequest())){
-                if(!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)){
+            if (validator.predicate.test(exchange.getRequest())) {
+
+                String authHeader = exchange.getRequest()
+                        .getHeaders()
+                        .getFirst(HttpHeaders.AUTHORIZATION);
+
+                if (authHeader == null) {
                     throw new BadRequestException("Authorization header is missing", HttpStatus.UNAUTHORIZED);
                 }
 
-                String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
-
-                String token = null;
-                if(null != authHeader && authHeader.startsWith("Bearer ")){
-                    token = authHeader.substring(7);
+                if (!authHeader.startsWith("Bearer ")) {
+                    throw new BadRequestException("Invalid Authorization header format", HttpStatus.UNAUTHORIZED);
                 }
-                try{
+
+                String token = authHeader.substring(7);
+
+                try {
                     jwtUtil.validateToken(token);
-                }catch (Exception e){
+                } catch (Exception e) {
                     throw new BadRequestException("Invalid token", HttpStatus.UNAUTHORIZED);
                 }
             }
+
             return chain.filter(exchange);
         };
     }
